@@ -4,21 +4,30 @@ import Title from "./components/Title.jsx";
 import Modal from "./components/Modal.jsx";
 
 function App() {
+  let isModalOpen = false;
+
+  function toggleModal() {
+    isModalOpen = !isModalOpen
+    console.log(isModalOpen)
+  }
   return (
     <div>
       <Title />
-      <div className="todo_wrapper">
-        <Todo title="Finish Frontend Simplified"
-        paragraph="Code along with Frontend Simplified step by step."
+      <div>
+        <input
+          type="text"
+          onChange={(event) => {
+            console.log(event.target.value);
+          }}
         />
-        <Todo title="Finish Interview Section"
-        paragraph="Finish every interview questions in the next 6 weeks"
-        />
-        <Todo title="Land a $100k Job"
-        paragraph="Apply to 100 jobs."
-        />
+        <button onClick={toggleModal}>Add Todo</button>
       </div>
-      <Modal title="Are you sure you want to delete?"/>
+      <div className="todo_wrapper">
+        <Todo title="Finish Frontend Simplified" />
+        <Todo title="Finish Interview Section" />
+        <Todo title="Land a $100k Job" />
+      </div>
+      {isModalOpen && <Modal title="Confirm Delete?" />}
     </div>
   );
 }
